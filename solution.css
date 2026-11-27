@@ -1,0 +1,203 @@
+/* =====================================================================
+   PORTFOLIO PROJECT · SOLUTION (teacher copy, CSS Grid only)
+   ===================================================================== */
+
+/* ---------- Colours and fonts (change these to make it yours!) ---------- */
+:root {
+  --bg: #F7F5F0;
+  --bg-alt: #EDE8DD;
+  --text: #1A1D2E;
+  --muted: #5A5F73;
+  --primary: #6D4AA8;
+  --accent: #FF7A45;
+  --card: #FFFFFF;
+  --radius: 14px;
+}
+
+/* ---------- Base look (given) ---------- */
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: "Segoe UI", system-ui, Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--bg);
+}
+img { display: block; }
+a { color: inherit; }
+h1, h2, h3 { line-height: 1.15; margin: 0 0 12px; }
+p { margin: 0 0 14px; }
+
+.wrap { width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+.section { padding: 60px 0; }
+.section-alt { background: var(--bg-alt); }
+.section-title { font-size: 32px; }
+.section-title::after {
+  content: ""; display: block; width: 60px; height: 4px;
+  background: var(--accent); border-radius: 2px; margin-top: 8px;
+}
+
+.btn {
+  display: inline-block; padding: 12px 24px; border-radius: 30px;
+  background: var(--primary); color: #fff; text-decoration: none;
+  font-weight: 600; border: 2px solid var(--primary); cursor: pointer;
+  font-size: 16px; transition: transform 0.2s, background 0.2s;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn-outline { background: transparent; color: var(--primary); }
+.btn-small { padding: 8px 18px; font-size: 14px; }
+
+/* header */
+.site-header { background: var(--card); box-shadow: 0 2px 10px rgba(0,0,0,0.06); }
+.logo { font-size: 26px; font-weight: 800; text-decoration: none; color: var(--primary); }
+.logo span { color: var(--accent); }
+.nav-links a { text-decoration: none; font-weight: 500; padding: 6px 4px; }
+.nav-links a:hover { color: var(--primary); }
+
+/* hero */
+.hero { padding-top: 50px; padding-bottom: 50px; }
+.eyebrow { color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin: 0; }
+.hero h1 { font-size: 44px; }
+.role { font-size: 22px; color: var(--primary); font-weight: 600; }
+.intro { color: var(--muted); max-width: 520px; }
+.hero-buttons { display: flex; flex-wrap: wrap; gap: 12px; }
+.avatar {
+  width: 220px; aspect-ratio: 1; border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: #fff; font-size: 70px; font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* about */
+.stat { background: var(--card); border-radius: var(--radius); padding: 20px; text-align: center; }
+.stat-num { display: block; font-size: 36px; font-weight: 800; color: var(--primary); }
+.stat-label { color: var(--muted); font-size: 15px; }
+
+/* skills */
+.skills { list-style: none; padding: 0; margin: 0; }
+.skill {
+  background: var(--card); border-left: 5px solid var(--accent);
+  border-radius: 8px; padding: 14px 16px; font-weight: 600;
+}
+
+/* projects */
+.project { background: var(--card); border-radius: var(--radius); overflow: hidden; box-shadow: 0 4px 14px rgba(0,0,0,0.06); display: flex; flex-direction: column; }
+.thumb { min-height: 160px; flex: 1; display: flex; align-items: flex-end; padding: 14px; color: #fff; font-weight: 700; }
+.t1 { background: linear-gradient(135deg, #6D4AA8, #FF7A45); }
+.t2 { background: linear-gradient(135deg, #0E7C7B, #7FD4CC); }
+.t3 { background: linear-gradient(135deg, #FF7A45, #FFD58A); }
+.t4 { background: linear-gradient(135deg, #5B8FD6, #A7C7F2); }
+.t5 { background: linear-gradient(135deg, #1A1D2E, #6D4AA8); }
+.project-body { padding: 18px; }
+.project-body p { color: var(--muted); }
+.tags span { display: inline-block; background: var(--bg-alt); color: var(--text); font-size: 13px; padding: 3px 10px; border-radius: 20px; margin: 0 4px 4px 0; }
+
+/* contact */
+.contact-form label { display: flex; flex-direction: column; gap: 6px; font-weight: 600; }
+.contact-form input, .contact-form textarea {
+  font: inherit; padding: 12px; border: 2px solid #D5CFC2; border-radius: 8px; background: var(--card);
+}
+.contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: var(--primary); }
+
+/* footer */
+.site-footer { background: var(--text); color: #E8E4DA; padding: 24px 0; }
+.site-footer p { margin: 0; }
+.social a { margin-right: 16px; text-decoration: none; }
+.social a:hover { color: var(--accent); }
+
+
+/* =====================================================================
+   LAYOUT · SOLUTION (CSS Grid only)
+   ===================================================================== */
+
+/* ---------- M1: Header / nav ---------- */
+.nav {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-template-areas: "logo links hire";
+  align-items: center;
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+.logo      { grid-area: logo; }
+.nav-links { grid-area: links; }
+.hire      { grid-area: hire; }
+
+.nav-links {
+  display: grid;
+  grid-auto-flow: column;      /* put the links side by side */
+  justify-content: center;
+  gap: 28px;
+}
+
+
+/* ---------- M2: Hero ---------- */
+.hero {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  grid-template-areas: "text photo";
+  align-items: center;
+  gap: 30px;
+  min-height: 520px;
+}
+.hero-text  { grid-area: text; }
+.hero-photo { grid-area: photo; justify-self: center; }
+
+
+/* ---------- M3: About ---------- */
+.about {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  align-items: center;
+  gap: 30px;
+}
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+
+/* ---------- M4: Skills ---------- */
+.skills {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+
+/* ---------- M5: Projects ---------- */
+.projects {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.featured {
+  grid-column: span 2;         /* 2 columns wide */
+  grid-row: span 2;            /* 2 rows tall    */
+}
+
+
+/* ---------- M6: Contact form ---------- */
+.contact-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  max-width: 760px;
+}
+.contact-form .full {
+  grid-column: 1 / -1;         /* from the first line to the last */
+}
+.contact-form button {
+  justify-self: start;         /* keep its natural width */
+}
+
+
+/* ---------- M7: Footer ---------- */
+.footer-inner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+}
